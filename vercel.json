@@ -3,6 +3,8 @@
     { "source": "/", "destination": "/index.html" },
     { "source": "/index2", "destination": "/index2.html" },
     { "source": "/index2.html", "destination": "/index2.html" },
+	{ "source": "/old", "destination": "/old.html" },
+	{ "source": "/old.html", "destination": "/old.html" },
     { "source": "/(.*)", "destination": "/$1" }
   ]
 }
