@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+14:41:51	1520/1520	---MCZ	404	error ('Not%20Found')	text/html	date:Fri,%2021%20Aug%202026%2011:41:51%20GMT	https://blox-gifts.vercel.app/robots.txt		(from )
+14:41:51	3783/3783	---MCZ	404	error ('Not%20Found')	text/html	date:Fri,%2021%20Aug%202026%2011:41:51%20GMT	https://blox-gifts.vercel.app/	C:/My%20Web%20Sites/blox-gifts/blox-gifts.vercel.app/index.html	(from )

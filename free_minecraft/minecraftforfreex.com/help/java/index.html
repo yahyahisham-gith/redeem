@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<!-- Mirrored from minecraftforfreex.com/help/java/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Jul 2026 21:37:43 GMT -->
+<head>
+      <title>Setup Java for Minecraft 1.5.2</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="canonical" href="index.html">
+      <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../css/main.css">
+<link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+<link rel="manifest" href="../../favicon/site.webmanifest">
+	  <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+      <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+         ga('create', 'UA-70337607-1', 'auto');
+         ga('send', 'pageview');
+      </script>
+	  	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-80SFHYWE59"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-80SFHYWE59');
+	</script>
+   </head>
+   <body>
+      <div id="wrap">
+         <div id="main" class="clear-top">
+            <nav class="navbar navbar-default navbar-inverse navbar-static-top">
+               <div class="container">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
+                     <div class="navbar-header">
+                        <a class="navbar-brand" href="../../index.html"><img class="img-responsive" alt="logo" src="../../images/logo.png" width="263" height="74"></a>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                     </div>
+                     <div class="collapse navbar-collapse" id="nav-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                           <li><a class="mc-btn nav-btn" href="../../eaglercraft/index.html">Play</a></li>
+                           <li><a class="mc-btn nav-btn" href="../index.html">Help</a></li>
+                           <li><a class="mc-btn nav-btn" href="../../guide/index.html">Guide</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-md-2"></div>
+               </div>
+            </nav>
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8 filled">
+                     <div class="hbox text-center">
+                        <h1>Setup Java for Minecraft 1.5.2</h1>
+                     </div>
+                     <div class="leaderboard-top">
+                        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6919167857759480" data-ad-slot="3363128245"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                     </div>
+                     <div class="bbox pad-l">
+			<p>Note: no configuration is required if you're playing Eaglercraft.</p>
+			<p> While there are several steps in order to get the old Minecraft 1.5.2 version working, you'll only need to do this once, and then you can enjoy all three singeplayer modes, as well as multiplayer if you're able to find an unofficial 1.5.2 server. Of course, you can always play <a href="../../eaglercraft/index.html">Eaglercraft</a> on a modern browser and not have to do all these steps.</p>
+                        <h2>Download Java</h2>
+                        <p>You will need to <a href="https://java.com/en/download/" rel="nofollow">download Java</a>, and make sure you are downloading it on Internet Explorer (IE) so the website can detect whether to give you the 32-bit or 64-bit version. Even if you already have it, it's a good idea to download it anyway to make sure you have latest version.</p>
+                        <p>IE may automatically stop Java from running when Minecraft tries to load. Make sure you click on <kbd>Allow blocked content</kbd> when IE asks you.</p>
+                        <p><img class="img-responsive" src="../../images/ie-blocked.png" /></p>
+                        <p>If the game doesn't load, you need to change some settings in the Java Control Panel (JCP).</p>
+                        <h2>Java Control Panel</h2>
+                        <p>To access the JCP:</p>
+                        <ol>
+                           <li>Press the <kbd><i class="fa fa-windows"></i></kbd> button to start a search.</li>
+                           <li>type in <kbd>configure java</kbd> and press <kbd>Enter</kbd>.</li>
+                        </ol>
+                        <p>Once you are in the JCP, take the steps below to ensure your security settings and browser allows Java to run successfully.</p>
+                        <ol>
+                           <li>Go to the <kbd>Security</kbd> tab and make sure <kbd>Enable Java content in the browser and Web Start applications</kbd> is checked.</li>
+                           <li>At the bottom you will see an <kbd>Exception Site List</kbd>. You will need to add three entries to this list, so click on <kbd>Edit Site List...</kbd> to begin.</li>
+                           <li>Click on <kbd>Add</kbd> and type in <kbd>https://minecraftforfreex.com/</kbd>. Then click on <kbd>Add</kbd> again. A popup will appear to confirm; just click on <kbd>Continue</kbd>.</li>
+                           <li>Do the previous step again, but type in <kbd>file:///</kbd> instead. Yes, there are three slashes.</li>
+                           <li>Finally, type in <kbd>https://s3.amazonaws.com</kbd>. Click <kbd>OK</kbd> to save these entries.</li>
+                        </ol>
+                        <p>When you're done, it should look like this image. If everything matches, click on <kbd>OK</kbd>.</p>
+                        <p><img class="img-responsive" alt="java settings" src="../../images/java-settings.png"></p>
+					</div>
+					<div class="leaderboard-bot">
+                        <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-6919167857759480" data-ad-slot="4839861446"></ins>
+                        <script>
+                           (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+					<div class="bbox pad-1">
+                        <h2>Restart Minecraft</h2>
+                        <p>Try to load Minecraft again and Java should ask if you want to run the application. Check off the box for <kbd>I accept the risk and want to run this application.</kbd> and then click on <kbd>Run</kbd>. You should now be able to play Minecraft.</p>
+						<p><img class="img-responsive" src="../../images/java-run.png" /></p>
+						<h2 id="nosound">No Sound?</h2>
+						<p>If your game has no sound, you'll need do the following:</p>
+						<ol>
+							<li>Download the <a href="https://drive.google.com/u/7/uc?id=1ehg40UhrehGLqb6m9r7NyYZn8IwWxmqO&amp;export=download" rel="nofollow">resources zip file</a>.</li>
+							<li>Unzip the resources folder to your computer.</li>
+							<li>Press the <kbd><i class="fa fa-windows"></i></kbd> button to search and then copy and paste this: <kbd>%appdata%/.minecraft</kbd>.</li>
+							<li>Hit <kbd>Enter</kbd> to open the directory. Now copy the <kbd>resources</kbd> folder you unzipped earlier into this directory.</li>
+							<li>Restart Minecraft and then you should have sound.</li>
+						</ol>
+                     </div>
+                  </div>
+                  <div class="col-md-2"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer class="footer">
+         <div class="container ftext">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+               <p><span class="highlight">We are not affiliated with Minecraft.net</span>
+                  <br/><br/><strong><a href="../../index.html">MinecraftForFreeX.com</a> | <a href="../../about/index.html">About</a> | <a href="../../contact/index.html">Contact Us</a> | <a href="../../privacy/index.html">Privacy Policy</a></strong>
+               </p>
+               <div class="col-md-2"></div>
+            </div>
+         </div>
+      </footer>
+      <script src="../../../code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script src="../../../maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script src="../../js/lazy.js"></script>
+   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"6701ed13609941ef90de9deda5a0f9a5","r":1}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1fdd3951bcb61eb',t:'MTc4NDg0MjY0Nw=='};var a=document.createElement('script');a.src='../../cdn-cgi/challenge-platform/h/b/scripts/jsd/3104729c556c/maind41d.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<!-- Mirrored from minecraftforfreex.com/help/java/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Jul 2026 21:37:44 GMT -->
+</html>

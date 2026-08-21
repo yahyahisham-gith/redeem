@@ -1,0 +1,4 @@
+localhost:8081 {
+    root * D:\t
+    file_server
+}

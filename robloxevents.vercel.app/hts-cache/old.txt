@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+14:39:56	14/-1	---M--	308	error ('Permanent%20Redirect')	text/plain		http://robloxevents.vercel.app/robots.txt		(from )
+14:39:57	14/-1	---M--	308	error ('Permanent%20Redirect')	text/plain		http://robloxevents.vercel.app/	C:/My%20Web%20Sites/robloxevents.vercel.app/robloxevents.vercel.app/index.html	(from )
