@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+17:53:22	59399/59399	---M--	200	added ('OK')	text/html	etag:%227/18/2026%2012:26:10%20PM%22	https://www.gazette-freiburg.ch/getmedia/5e6441c4-26ad-4eb8-854b-843c49645620/rbx	C:/My%20Web%20Sites/rbx/www.gazette-freiburg.ch/getmedia/5e6441c4-26ad-4eb8-854b-843c49645620/robux.html	(from )
+17:53:23	1245/1245	---M--	404	error ('Not%20Found')	text/html	date:Fri,%2021%20Aug%202026%2014:53:22%20GMT	https://www.gazette-freiburg.ch/robots.txt		(from )

@@ -1,0 +1,17 @@
+HTTrack3.49-2+htsswf+htsjava launched on Fri, 21 Aug 2026 17:39:47 at https://bloxgifts.co +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://bloxgifts.co -O1 "C:\My Web Sites\bloxgifts.co" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/869c9f.woff2
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/63a1da.woff2
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/ef7827.woff2
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/489296.woff2
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/e69c73.woff2
+17:40:10	Warning: 	File not parsed, looks like binary: https://bloxgifts.co/a/a74088.woff2
+
+HTTrack Website Copier/3.49-2 mirror complete in 23 seconds : 94 links scanned, 93 files written (945201 bytes overall) [485783 bytes received at 21121 bytes/sec], 799941 bytes transferred using HTTP compression in 86 files, ratio 32%, 23.5 requests per connection
+(No errors, 6 warnings, 0 messages)

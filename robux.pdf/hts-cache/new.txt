@@ -1,0 +1,2 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+17:53:47	158659/158659	---M--	200	added ('OK')	application/pdf	date:Fri,%2021%20Aug%202026%2013:40:45%20GMT	https://observer.globe.gov/documents/10157/87145217/free-Robux-usa.pdf	C:/My%20Web%20Sites/robux.pdf/observer.globe.gov/documents/10157/87145217/free-Robux-usa.pdf	(from )

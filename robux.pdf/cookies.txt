@@ -1,0 +1,7 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+observer.globe.gov	TRUE	/	FALSE	1999999999	AWSALB	RV58/AzuB88XJPwt0cUxA1dJ5OoT0kTNjDS6SF0dosY1vx0rWL/vodwqNmIlsJMPQeJ35+Pf2pYyImA0P2bZJKShNrGlVDOA4zJGwLlKOM5ADe2qrjYOyxuMmOQg
+observer.globe.gov	TRUE	/	FALSE	1999999999	AWSALBCORS	RV58/AzuB88XJPwt0cUxA1dJ5OoT0kTNjDS6SF0dosY1vx0rWL/vodwqNmIlsJMPQeJ35+Pf2pYyImA0P2bZJKShNrGlVDOA4zJGwLlKOM5ADe2qrjYOyxuMmOQg
+observer.globe.gov	TRUE	/	FALSE	1999999999	SameSite	None
+observer.globe.gov	TRUE	/	FALSE	1999999999	JSESSIONID	4B81166FDC2C45576BF6F45B03300843
+
