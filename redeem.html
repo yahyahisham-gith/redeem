@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Redeem Portal</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0a001a;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .app-screen {
+            display: none;
+        }
+        .app-screen.block {
+            display: block;
+        }
+        .white-card {
+            background: #ffffff;
+            color: #333333;
+            border-radius: 24px;
+            padding: 30px 24px;
+            box-shadow: 0 10px 40px rgba(59,0,134,0.6);
+            text-align: center;
+            position: relative;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: 3rem;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            letter-spacing: 0.05em;
+        }
+        .custom-input, .custom-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.07);
+            border: 2px solid #3b0086;
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .custom-select {
+            color: #ffffff;
+            background-color: #150530;
+        }
+        .custom-select option {
+            background-color: #150530;
+            color: white;
+        }
+        .custom-input:focus, .custom-select:focus {
+            border-color: #8b5cf6;
+        }
+        .btn-redeem {
+            width: 100%;
+            background: linear-gradient(to right, #3b0086, #240052);
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(59, 0, 134, 0.5);
+            transition: filter 0.2s;
+        }
+        .btn-redeem:hover {
+            filter: brightness(1.2);
+        }
+        .btn-secondary-redeem {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #d8b4fe;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-secondary-redeem:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        .offer-btn {
+            display: block;
+            width: 100%;
+            background: #10b981;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: background 0.2s;
+        }
+        .offer-btn:hover {
+            background: #059669;
+        }
+        .utility-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .utility-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #8b5cf6;
+        }
+        .toast-notification {
+            background: rgba(59, 0, 134, 0.8);
+            border: 1px solid #8b5cf6;
+            backdrop-filter: blur(4px);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+            opacity: 0.6;
+        }
+        .social-footer svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        .overlapping-logo {
+            width: 70px;
+            height: 70px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            margin: -60px auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Screen 1: Choose Reward & Input Details -->
+        <div id="screen-1" class="app-screen block">
+            <div class="toast-notification max-w-[300px] mx-auto">
+                <div>
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                </div>
+                <div class="text-[13px] leading-tight font-medium text-white">
+                    Special Promo Code:<br><strong>SECRET4</strong><br>
+                    Only <strong id="dynamic-codes">10</strong> claims remaining.
+                </div>
+            </div>
+
+            <h1 class="logo-text">redeem</h1>
+
+            <div class="space-y-4 mb-6">
+                <select id="input-reward" class="custom-select">
+                    <option value="Robux">Robux</option>
+                    <option value="V-Bucks">V-Bucks</option>
+                    <option value="Gift Card">Gift Card</option>
+                    <option value="Nitro">Discord Nitro</option>
+                </select>
+                <input type="text" id="input-code" class="custom-input" placeholder="Promo Code" value="SECRET4">
+                <input type="text" id="input-username" class="custom-input" placeholder="Enter a username">
+                <p class="text-[11px] text-purple-300 text-center font-medium mt-1">🔒 This website will never ask for your password.</p>
+            </div>
+
+            <div class="space-y-3">
+                <button id="btn-submit" class="btn-redeem" onclick="processRedeem(false)">
+                    <span id="btn-text">Redeem Reward</span>
+                </button>
+                <button id="btn-skip-username" class="btn-secondary-redeem" onclick="processRedeem(true)">
+                    Redeem Without Username
+                </button>
+            </div>
+
+            <!-- Other Links Section (No Claims Required) -->
+            <div class="mt-8 pt-6 border-t border-purple-900/50">
+                <p class="text-xs font-semibold uppercase tracking-wider text-purple-300 mb-3 text-center">Other Portals & Resources</p>
+                <div class="flex flex-col gap-2">
+                    <a href="https://discord.gg/uwRsdbPpek" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>💬 Discord Community</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://ais-dev-j5e6vakn3lq6hihzkewsow-256767828767.europe-west2.run.app/" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>🚀 Dev Run Environment</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://portalcodingstudio.ai.studio/" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>💻 Portal Coding Studio</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://ais-pre-j5e6vakn3lq6hihzkewsow-256767828767.europe-west2.run.app/" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>🧪 Staging Preview App</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://portal-coding-studio-24557411394.europe-west2.run.app/" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>⚡ Studio Cloud Run Instance</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://ai.studio/apps/d0c3e816-39ac-46db-9728-f3dca994691c" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>📦 AI Studio App Link</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                    <a href="https://github.com/yahyahisham-gith/coding-portal-studio/tree/main" target="_blank" rel="noopener noreferrer" class="utility-btn flex items-center justify-between">
+                        <span>📂 GitHub Source Repository</span>
+                        <span class="text-xs opacity-60">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 2: Verification with 0.5s Wait & Generated Code Reveal -->
+        <div id="screen-2" class="app-screen white-card">
+            <div class="overlapping-logo">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#3b0086"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+
+            <h2 class="text-2xl font-extrabold mb-2 text-gray-900">Almost Ready</h2>
+            <p class="text-gray-400 font-semibold mb-1 text-xs uppercase tracking-wider">Reward: <span id="display-reward" class="text-purple-600 font-bold">Robux</span></p>
+            <p id="display-username" class="text-xl font-bold text-gray-800 mb-2">@Player</p>
+            <p class="text-[11px] text-gray-500 font-medium mb-4">🔒 We will never ask for your password.</p>
+            
+            <p class="text-sm text-gray-600 font-medium mb-6 leading-relaxed">
+                Click any verification link below. Once completed, your generated reward code will unlock.
+            </p>
+
+            <div class="w-full flex flex-col gap-3 mb-6">
+                <!-- HawkTrk Offers -->
+                <a href="https://app.hawktrk.com/click?pid=2&offer_id=20529&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger">
+                    Spin the slot to take a chance at a special offer!
+                </a>
+                <a href="https://app.hawktrk.com/click?pid=2&offer_id=20659&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger" style="background: #3b0086;">
+                    Score more than 2 goals to unlock a special offer!
+                </a>
+                <a href="https://app.hawktrk.com/click?pid=2&offer_id=20395&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger" style="background: #2563eb;">
+                    أدر العجلة وتحقق من جائزتك في الخطوة التالية!
+                </a>
+
+                <!-- Adsterra Links -->
+                <a href="https://www.effectivecpmnetwork.com/ujvbniai6g?key=53edaa71d504f3fe8f2db7aff158525b" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger" style="background: #7c3aed;">
+                    Verification Option 1 (Standard)
+                </a>
+                <a href="https://appointedbewitchbrakes.com/ujvbniai6g?key=53edaa71d504f3fe8f2db7aff158525b" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger" style="background: #0284c7;">
+                    Verification Option 1 (Anti-Adblock)
+                </a>
+                <a href="https://www.effectivecpmnetwork.com/q8wk71f07?key=1db31eee89d17c5565ce5f081c2d569b" target="_blank" rel="noopener noreferrer" class="offer-btn pr-12 link-trigger" style="background: #059669;">
+                    Verification Option 2 (Standard)
+                </a>
+            </div>
+
+            <!-- Dynamic Code Reveal Section (Appears after 0.5s delay on click) -->
+            <div id="claim-section" class="mb-4" style="display: none;">
+                <div class="bg-gray-100 border border-gray-300 rounded-xl p-3 mb-3 text-center">
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Your Generated Code:</p>
+                    <span id="generated-code-box" class="text-lg font-mono font-bold text-purple-700 tracking-widest select-all">XXXX-XXXX-XXXX</span>
+                </div>
+                <button onclick="copyGeneratedCode()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg transition">
+                    📋 Copy Code & Finish
+                </button>
+            </div>
+
+            <button onclick="navTo('screen-1')" class="text-gray-500 font-semibold text-sm hover:text-gray-800 transition">
+                &larr; Back to Entry Form
+            </button>
+
+            <!-- Raw Ad Links Section at the Very Bottom for Webmasters -->
+            <div class="mt-8 pt-4 border-t border-gray-200 text-left">
+                <p class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-2">Raw Ad Links (For Webmasters)</p>
+                <div class="max-h-32 overflow-y-auto bg-gray-50 p-2 rounded-lg border border-gray-200 text-[10px] text-gray-600 font-mono space-y-1">
+                    <div class="break-all"><a href="https://app.hawktrk.com/click?pid=2&offer_id=20529&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" class="text-blue-600 underline">Offer 20529 (Spin Slot)</a></div>
+                    <div class="break-all"><a href="https://app.hawktrk.com/click?pid=2&offer_id=20659&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" class="text-blue-600 underline">Offer 20659 (Goals)</a></div>
+                    <div class="break-all"><a href="https://app.hawktrk.com/click?pid=2&offer_id=20395&sub2=u779217&sub7=rfhttps%3A%2F%2Fquataunhzm.vercel.app%2F&sub8=rdquataunhzm.vercel.app&sub15=4edd0432abeb" target="_blank" class="text-blue-600 underline">Offer 20395 (Wheel - Arabic)</a></div>
+                    <div class="break-all"><a href="https://www.effectivecpmnetwork.com/ujvbniai6g?key=53edaa71d504f3fe8f2db7aff158525b" target="_blank" class="text-blue-600 underline">Adsterra Standard Link 1</a></div>
+                    <div class="break-all"><a href="https://appointedbewitchbrakes.com/ujvbniai6g?key=53edaa71d504f3fe8f2db7aff158525b" target="_blank" class="text-blue-600 underline">Adsterra Anti-Adblock Link 1</a></div>
+                    <div class="break-all"><a href="https://www.effectivecpmnetwork.com/q8wk71f07?key=1db31eee89d17c5565ce5f081c2d569b" target="_blank" class="text-blue-600 underline">Adsterra Standard Link 2</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateRandomCode(rewardType) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let prefix = 'REWARD';
+            if (rewardType === 'Robux') prefix = 'RBX';
+            else if (rewardType === 'V-Bucks') prefix = 'VBK';
+            else if (rewardType === 'Nitro') prefix = 'NIT';
+            else if (rewardType === 'Gift Card') prefix = 'GCARD';
+
+            let randomPart = '';
+            for (let i = 0; i < 8; i++) {
+                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return `${prefix}-${randomPart.slice(0,4)}-${randomPart.slice(4)}`;
+        }
+
+        function processRedeem(skipUsername) {
+            const usernameInput = document.getElementById('input-username').value.trim();
+            const selectedReward = document.getElementById('input-reward').value;
+            
+            let displayTarget = "@Anonymous";
+            if (!skipUsername) {
+                if(!usernameInput) {
+                    alert('Please enter a username or click "Redeem Without Username"');
+                    return;
+                }
+                displayTarget = usernameInput;
+            }
+            
+            document.getElementById('display-username').innerText = displayTarget;
+            document.getElementById('display-reward').innerText = selectedReward;
+            
+            // Generate unique code based on the selected reward
+            const uniqueCode = generateRandomCode(selectedReward);
+            document.getElementById('generated-code-box').innerText = uniqueCode;
+            
+            // Reset claim button state on new entry
+            document.getElementById('claim-section').style.display = 'none';
+            document.querySelectorAll('.link-trigger').forEach(el => {
+                el.style.pointerEvents = 'auto';
+                el.innerHTML = el.getAttribute('data-original-text') || el.innerHTML;
+            });
+            
+            document.getElementById('screen-1').classList.remove('block');
+            document.getElementById('screen-2').classList.add('block');
+        }
+
+        // Attach 0.5 second verification processing loader and reveal code section
+        document.querySelectorAll('.link-trigger').forEach(link => {
+            link.setAttribute('data-original-text', link.innerHTML);
+            link.addEventListener('click', function(e) {
+                const currentLink = this;
+                
+                // Show loading state briefly
+                currentLink.innerHTML = '<span class="loader"></span> Verifying click...';
+                
+                setTimeout(() => {
+                    currentLink.innerHTML = currentLink.getAttribute('data-original-str') || currentLink.getAttribute('data-original-text');
+                    // Reveal code section
+                    document.getElementById('claim-section').style.display = 'block';
+                }, 500); // 0.5 second delay
+            });
+        });
+
+        function copyGeneratedCode() {
+            const codeText = document.getElementById('generated-code-box').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Code copied to clipboard: ' + codeText);
+            }).catch(err => {
+                alert('Failed to copy code. You can highlight and copy it manually.');
+            });
+        }
+
+        function navTo(screenId) {
+            document.getElementById('screen-1').classList.remove('block');
+            document.getElementById('screen-2').classList.remove('block');
+            document.getElementById(screenId).classList.add('block');
+        }
+    </script>
+</body>
+</html>
