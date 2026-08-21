@@ -1,193 +1,263 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="HTTrack is an easy-to-use website mirror utility. It allows you to download a World Wide website from the Internet to a local directory,building recursively all structures, getting html, images, and other files from the server to your computer. Links are rebuiltrelatively so that you can freely browse to the local site (works with any browser). You can mirror several sites together so that you can jump from one toanother. You can, also, update an existing mirror site, or resume an interrupted download. The robot is fully configurable, with an integrated help" />
-	<meta name="keywords" content="httrack, HTTRACK, HTTrack, winhttrack, WINHTTRACK, WinHTTrack, offline browser, web mirror utility, aspirateur web, surf offline, web capture, www mirror utility, browse offline, local  site builder, website mirroring, aspirateur www, internet grabber, capture de site web, internet tool, hors connexion, unix, dos, windows 95, windows 98, solaris, ibm580, AIX 4.0, HTS, HTGet, web aspirator, web aspirateur, libre, GPL, GNU, free software" />
-	<title>List of available projects - HTTrack Website Copier</title>
-	<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTTrack is an easy-to-use website mirror utility. List of locally available offline projects.">
+    <title>List of Available Projects - HTTrack Website Copier</title>
+    
+    <!-- Google Fonts for clean typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-	<style type="text/css">
-	<!--
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
 
-body {
-	margin: 0;  padding: 0;  margin-bottom: 15px;  margin-top: 8px;
-	background: #77b;
-}
-body, td {
-	font: 14px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-	}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-#subTitle {
-	background: #000;  color: #fff;  padding: 4px;  font-weight: bold; 
-	}
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-#siteNavigation a, #siteNavigation .current {
-	font-weight: bold;  color: #448;
-	}
-#siteNavigation a:link    { text-decoration: none; }
-#siteNavigation a:visited { text-decoration: none; }
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
 
-#siteNavigation .current { background-color: #ccd; }
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-#siteNavigation a:hover   { text-decoration: none;  background-color: #fff;  color: #000; }
-#siteNavigation a:active  { text-decoration: none;  background-color: #ccc; }
+        header p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
 
+        main {
+            flex: 1;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-a:link    { text-decoration: underline;  color: #00f; }
-a:visited { text-decoration: underline;  color: #000; }
-a:hover   { text-decoration: underline;  color: #c00; }
-a:active  { text-decoration: underline; }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
 
-#pageContent {
-	clear: both;
-	border-bottom: 6px solid #000;
-	padding: 10px;  padding-top: 20px;
-	line-height: 1.65em;
-	background-image: url(backblue.gif);
-	background-repeat: no-repeat;
-	background-position: top right;
-	}
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
 
-#pageContent, #siteNavigation {
-	background-color: #ccd;
-	}
+        @media (min-width: 640px) {
+            .project-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+        }
 
-.imgLeft  { float: left;   margin-right: 10px;  margin-bottom: 10px; }
-.imgRight { float: right;  margin-left: 10px;   margin-bottom: 10px; }
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
 
-hr { height: 1px;  color: #000;  background-color: #000;  margin-bottom: 15px; }
+        .project-info {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            overflow: hidden;
+        }
 
-h1 { margin: 0;  font-weight: bold;  font-size: 2em; }
-h2 { margin: 0;  font-weight: bold;  font-size: 1.6em; }
-h3 { margin: 0;  font-weight: bold;  font-size: 1.3em; }
-h4 { margin: 0;  font-weight: bold;  font-size: 1.18em; }
+        .project-icon {
+            background-color: #eff6ff;
+            color: var(--accent-color);
+            padding: 0.65rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-.blak { background-color: #000; }
-.hide { display: none; }
-.tableWidth { min-width: 400px; }
+        .project-icon svg {
+            width: 20px;
+            height: 20px;
+        }
 
-.tblRegular       { border-collapse: collapse; }
-.tblRegular td    { padding: 6px;  background-image: url(fade.gif);  border: 2px solid #99c; }
-.tblHeaderColor, .tblHeaderColor td { background: #99c; }
-.tblNoBorder td   { border: 0; }
+        .project-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
+        .project-arrow {
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
 
-// -->
-</style>
+        .project-card:hover .project-arrow {
+            transform: translateX(4px);
+            color: var(--accent-color);
+        }
 
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            margin-top: auto;
+        }
+    </style>
 </head>
-
 <body>
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="3" class="tableWidth">
-	<tr>
-	<td id="subTitle">HTTrack Website Copier - Open Source offline browser</td>
-	</tr>
-</table>
-<table width="76%" border="0" align="center" cellspacing="0" cellpadding="0" class="tableWidth">
-<tr class="blak">
-<td>
-	<table width="100%" border="0" align="center" cellspacing="1" cellpadding="0">
-	<tr>
-	<td colspan="6"> 
-		<table width="100%" border="0" align="center" cellspacing="0" cellpadding="10">
-		<tr> 
-		<td id="pageContent"> 
-<!-- ==================== End prologue ==================== -->
 
+    <header>
+        <h1>HTTrack Website Copier</h1>
+        <p>Index of Locally Available Offline Projects</p>
+    </header>
 
-<h1 ALIGN=Center>Index of locally available projects:</H1>
-  <table border="0" width="100%" cellspacing="1" cellpadding="0">
-		<TH>
-		<BR/>
-			No categories
-		</TH>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="banana-livid/index.html">banana-livid</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="blox-gifts/index.html">blox-gifts</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
+    <main>
+        <div class="section-title">No Categories</div>
+        
+        <div class="project-grid">
+            <a href="blox-gifts/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">blox-gifts</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
 
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
+            <a href="quataunhzm/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">quataunhzm</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
 
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                      		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="quataunhzm/index.html">quataunhzm</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="reHref/index.html">reHref</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="robloxevents/index.html">robloxevents</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="robloxevents.vercel.app/index.html">robloxevents.vercel.app</A>
-   		  </TD>
-		</TR>
-		<TR>
+            <a href="reHref/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">reHref</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
 
+            <a href="robloxevents/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">robloxevents</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
 
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="roboticAssignment/index.html">roboticAssignment</A>
-   		  </TD>
-		</TR>
-		<TR>
-		  <TD BACKGROUND="fade.gif">
-                    &middot; <A HREF="thehatchlive/index.html">thehatchlive</A>
-   		  </TD>
-		</TR>
-	</TABLE>
-	<BR>
-	<H6 ALIGN="RIGHT">
-         <I>Mirror and index made by HTTrack Website Copier [XR&CO'2008]</I>
-	</H6>
-	<!-- Mirror and index made by HTTrack Website Copier/3.49-2 [XR&CO'2014] -->
-	<!-- Thanks for using HTTrack Website Copier! -->
+            <a href="robloxevents.vercel.app/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">robloxevents.vercel.app</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
 
-<!-- ==================== Start epilogue ==================== -->
-		</td>
-		</tr>
-		</table>
-	</td>
-	</tr>
-	</table>
-</td>
-</tr>
-</table>
+            <a href="thehatchlive/index.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">thehatchlive</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+				
+				            <a href="old.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">old</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
+        </div>
+		
+						            <a href="index2.html" class="project-card">
+                <div class="project-info">
+                    <div class="project-icon">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"></path></svg>
+                    </div>
+                    <span class="project-name">index2</span>
+                </div>
+                <span class="project-arrow">&rarr;</span>
+            </a>
+        </div>
+		
+    </main>
 
-<table width="76%" border="0" align="center" valign="bottom" cellspacing="0" cellpadding="0">
-	<tr>
-	<td id="footer"><small>&copy; 2008 Xavier Roche & other contributors - Web Design: Leto Kauler.</small></td>
-	</tr>
-</table>
+    <footer>
+        <p>&copy; Xavier Roche & other contributors - Modernized for mobile and desktop.</p>
+    </footer>
 
 </body>
-
 </html>
-
-
