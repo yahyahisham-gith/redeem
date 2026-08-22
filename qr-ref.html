@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Referral QR Generator</title>
+    <style>
+        :root {
+            --bg: #0b1120;
+            --panel: #111827;
+            --card: #1f2937;
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-2: #22c55e;
+            --border: #334155;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+        .container {
+            width: min(1100px, 100%);
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+        }
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(1.5rem, 2vw, 2.4rem);
+        }
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .panel {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+        }
+        label {
+            display: block;
+            font-size: 0.82rem;
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+        input, select, button {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            font-size: 0.96rem;
+        }
+        input, select {
+            background: #0f172a;
+            color: var(--text);
+        }
+        button {
+            background: linear-gradient(135deg, var(--accent), #2563eb);
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.98;
+        }
+        .button-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .secondary {
+            background: linear-gradient(135deg, var(--accent-2), #16a34a);
+        }
+        #qrCanvas {
+            display: block;
+            margin: 12px auto 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+        }
+        .qr-stage {
+            position: relative;
+            width: 320px;
+            max-width: 100%;
+            margin: 12px auto 0;
+        }
+        .qr-stage #qrCanvas {
+            margin: 0;
+        }
+        .qr-logo-overlay {
+            display: none;
+            position: absolute;
+            width: 22%;
+            aspect-ratio: 1;
+            left: 39%;
+            top: 39%;
+            object-fit: cover;
+            border: 5px solid #ffffff;
+            border-radius: 50%;
+            background: #ffffff;
+        }
+        .share-preview {
+            word-break: break-all;
+            margin-top: 12px;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+            color: #bfdbfe;
+            min-height: 70px;
+        }
+        .note {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+        .inline-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            color: var(--muted);
+        }
+        .toggle-group input {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Referral QR Generator</h1>
+        <div class="subtitle">Generate referral links, Wi‑Fi QR codes, or any custom content with an optional center logo.</div>
+
+        <div class="grid">
+            <div class="panel">
+                <label for="qrMode">QR mode</label>
+                <select id="qrMode">
+                    <option value="referral">Referral link</option>
+                    <option value="wifi">Wi‑Fi network</option>
+                    <option value="custom">Custom text / URL</option>
+                </select>
+
+                <div id="referralFields">
+                    <label for="baseUrl" style="margin-top:16px;">Base URL</label>
+                    <input id="baseUrl" type="text" value="" placeholder="https://yourdomain.com" />
+
+                    <label for="refSegment" style="margin-top:16px;">Referral path style</label>
+                    <select id="refSegment">
+                        <option value="/ref/">/ref/123456</option>
+                        <option value="/r/">/r/123456</option>
+                        <option value="?r=">?r=123456</option>
+                        <option value="/">/page.html?r=123456</option>
+                    </select>
+
+                    <label for="refCode" style="margin-top:16px;">Referral code</label>
+                    <input id="refCode" type="text" placeholder="123456" />
+
+                    <label for="targetUrl" style="margin-top:16px;">Destination URL (optional)</label>
+                    <input id="targetUrl" type="text" placeholder="https://example.com" />
+                </div>
+
+                <div id="wifiFields" style="display:none;">
+                    <label for="wifiSsid" style="margin-top:16px;">Wi‑Fi SSID</label>
+                    <input id="wifiSsid" type="text" placeholder="MyWiFi" />
+
+                    <label for="wifiPassword" style="margin-top:16px;">Password</label>
+                    <input id="wifiPassword" type="text" placeholder="wifi-password" />
+
+                    <div class="inline-row" style="margin-top:16px;">
+                        <div>
+                            <label for="wifiSecurity">Security</label>
+                            <select id="wifiSecurity">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">No password</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="wifiHidden">Hidden network</label>
+                            <select id="wifiHidden">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="customFields" style="display:none;">
+                    <label for="customText" style="margin-top:16px;">Custom text or URL</label>
+                    <input id="customText" type="text" placeholder="https://example.com or custom text" />
+                </div>
+
+                <label for="logoPreset" style="margin-top:16px;">Default logo</label>
+                <select id="logoPreset">
+                    <option value="none">None</option>
+                    <option value="wifi">Wi‑Fi</option>
+                    <option value="link">Link</option>
+                    <option value="globe">Globe</option>
+                    <option value="star">Star</option>
+                </select>
+
+                <label for="logoUrl" style="margin-top:16px;">Logo image URL (any image format)</label>
+                <input id="logoUrl" type="text" placeholder="https://example.com/logo.png" />
+
+                <label for="logoFile" style="margin-top:16px;">Upload logo file</label>
+                <input id="logoFile" type="file" accept="image/*" />
+
+                <div class="button-row">
+                    <button id="generateBtn">Generate</button>
+                    <button id="copyBtn" class="secondary">Copy data</button>
+                </div>
+
+                <div class="share-preview" id="sharePreview">Your QR payload will appear here.</div>
+            </div>
+
+            <div class="panel">
+                <label>QR code preview</label>
+                <div class="qr-stage">
+                    <img id="qrCanvas" alt="QR code preview" width="320" height="320" />
+                    <canvas id="qrRenderCanvas" width="320" height="320" hidden></canvas>
+                </div>
+                <div class="note">Optional logo support works with local uploaded files, image URLs, or the built-in default logo choices.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const defaultLogos = {
+            none: '',
+            wifi: 'https://dummyimage.com/64x64/0f172a/38bdf8.png&text=WiFi',
+            link: 'https://dummyimage.com/64x64/0f172a/22c55e.png&text=Link',
+            globe: 'https://dummyimage.com/64x64/0f172a/f59e0b.png&text=Web',
+            star: 'https://dummyimage.com/64x64/0f172a/facc15.png&text=*'
+        };
+
+        let uploadedLogoData = '';
+
+        function createSvgDataUri(svg) {
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+        }
+
+        function getCurrentBaseUrl() {
+            return window.location.origin;
+        }
+
+        function isAbsoluteHttpUrl(value) {
+            return /^https?:\/\//i.test((value || '').trim());
+        }
+
+        function normalizeBaseUrl(value) {
+            if (!value) return getCurrentBaseUrl();
+            const trimmed = value.trim();
+            if (!trimmed) return getCurrentBaseUrl();
+            return trimmed.endsWith('/') ? trimmed.slice(0, -1) : trimmed;
+        }
+
+        function generateCode() {
+            return Math.floor(Math.random() * 900000 + 100000).toString();
+        }
+
+        function makeReferralUrl() {
+            const baseUrl = normalizeBaseUrl(document.getElementById('baseUrl').value);
+            const refMode = document.getElementById('refSegment').value;
+            const code = document.getElementById('refCode').value.trim() || generateCode();
+            const targetUrl = document.getElementById('targetUrl').value.trim();
+            let url = baseUrl;
+
+            if (refMode === '/ref/') {
+                url += '/ref/' + encodeURIComponent(code);
+            } else if (refMode === '/r/') {
+                url += '/r/' + encodeURIComponent(code);
+            } else if (refMode === '?r=') {
+                url += '?r=' + encodeURIComponent(code);
+            } else {
+                const slashIndex = url.lastIndexOf('/');
+                const hasFile = url.slice(slashIndex + 1).includes('.') || url.endsWith('/') === false;
+                url = hasFile ? url + '?r=' + encodeURIComponent(code) : url + '/index.html?r=' + encodeURIComponent(code);
+            }
+
+            if (targetUrl) {
+                url += (url.includes('?') ? '&' : '?') + 'target=' + encodeURIComponent(targetUrl);
+            }
+
+            return { url, code };
+        }
+
+        function makeWifiString() {
+            const ssid = document.getElementById('wifiSsid').value.trim();
+            const password = document.getElementById('wifiPassword').value.trim();
+            const security = document.getElementById('wifiSecurity').value;
+            const hidden = document.getElementById('wifiHidden').value === 'true';
+
+            if (!ssid) return 'WIFI:T:WPA;S:ExampleNetwork;P:examplepass;H:false;;';
+
+            let wifi = 'WIFI:';
+            if (security === 'nopass') {
+                wifi += 'T:nopass;';
+            } else {
+                wifi += 'T:' + security + ';';
+            }
+            wifi += 'S:' + ssid + ';';
+            if (security !== 'nopass' && password) {
+                wifi += 'P:' + password + ';';
+            }
+            wifi += 'H:' + (hidden ? 'true' : 'false') + ';;';
+            return wifi;
+        }
+
+        function getActivePayload() {
+            const mode = document.getElementById('qrMode').value;
+            if (mode === 'wifi') return makeWifiString();
+            if (mode === 'custom') return document.getElementById('customText').value.trim() || 'https://example.com';
+            return makeReferralUrl().url;
+        }
+
+        function getPendingLogo() {
+            const customUrl = (document.getElementById('logoUrl').value || '').trim();
+            if (uploadedLogoData) return uploadedLogoData;
+            if (customUrl) return customUrl;
+            const preset = document.getElementById('logoPreset').value;
+            return defaultLogos[preset] || '';
+        }
+
+        function drawQr(payload) {
+            const image = document.getElementById('qrCanvas');
+            const logoSource = getPendingLogo();
+            const renderCanvas = document.getElementById('qrRenderCanvas');
+            const qrSource = 'https://quickchart.io/qr?text=' + encodeURIComponent(payload) + '&size=320&margin=2&ecLevel=H';
+            const qrImage = new Image();
+            qrImage.crossOrigin = 'anonymous';
+            image.alt = 'QR code for ' + payload;
+            qrImage.onload = function () {
+                const ctx = renderCanvas.getContext('2d');
+                ctx.clearRect(0, 0, renderCanvas.width, renderCanvas.height);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, renderCanvas.width, renderCanvas.height);
+                ctx.drawImage(qrImage, 0, 0, renderCanvas.width, renderCanvas.height);
+
+                if (!logoSource) {
+                    publishQrImage(image, renderCanvas, qrSource);
+                    return;
+                }
+
+                const logoImage = new Image();
+                logoImage.crossOrigin = 'anonymous';
+                logoImage.onload = function () {
+                    const size = renderCanvas.width * 0.22;
+                    const offset = (renderCanvas.width - size) / 2;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(renderCanvas.width / 2, renderCanvas.height / 2, size * 0.58, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(renderCanvas.width / 2, renderCanvas.height / 2, size / 2, 0, Math.PI * 2);
+                    ctx.clip();
+                    ctx.drawImage(logoImage, offset, offset, size, size);
+                    ctx.restore();
+                    publishQrImage(image, renderCanvas, qrSource);
+                };
+                logoImage.onerror = function () {
+                    publishQrImage(image, renderCanvas, qrSource);
+                };
+                logoImage.src = logoSource;
+            };
+            qrImage.onerror = function () {
+                image.src = qrSource;
+            };
+            qrImage.src = qrSource;
+        }
+
+        function publishQrImage(image, canvas, fallback) {
+            try {
+                image.src = canvas.toDataURL('image/png');
+            } catch (error) {
+                image.src = fallback;
+            }
+        }
+
+        function addLogoToCanvas(canvas) {
+            const logoSource = getPendingLogo();
+            if (!logoSource) return;
+
+            const ctx = canvas.getContext('2d');
+            const image = new Image();
+            image.crossOrigin = 'anonymous';
+            image.onload = function () {
+                const size = Math.min(canvas.width, canvas.height) * 0.22;
+                const x = (canvas.width - size) / 2;
+                const y = (canvas.height - size) / 2;
+
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true);
+                ctx.closePath();
+                ctx.clip();
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(x, y, size, size);
+                ctx.drawImage(image, x, y, size, size);
+                ctx.restore();
+
+                ctx.beginPath();
+                ctx.arc(x + size / 2, y + size / 2, size / 2 + 3, 0, Math.PI * 2);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#e2e8f0';
+                ctx.stroke();
+            };
+            image.src = logoSource;
+        }
+
+        function updateQrData() {
+            const payload = getActivePayload();
+            const url = payload;
+            document.getElementById('sharePreview').textContent = url;
+            drawQr(payload);
+            return url;
+        }
+
+        function setDefaultValues() {
+            document.getElementById('baseUrl').value = getCurrentBaseUrl();
+            document.getElementById('refCode').value = generateCode();
+            document.getElementById('logoPreset').value = 'none';
+            document.getElementById('wifiSsid').value = 'MyWiFi';
+            document.getElementById('wifiPassword').value = 'password123';
+            document.getElementById('customText').value = 'https://example.com';
+            updateQrData();
+        }
+
+        function toggleModeFields() {
+            const mode = document.getElementById('qrMode').value;
+            document.getElementById('referralFields').style.display = mode === 'referral' ? 'block' : 'none';
+            document.getElementById('wifiFields').style.display = mode === 'wifi' ? 'block' : 'none';
+            document.getElementById('customFields').style.display = mode === 'custom' ? 'block' : 'none';
+            updateQrData();
+        }
+
+        document.getElementById('baseUrl').value = getCurrentBaseUrl();
+        document.getElementById('refCode').value = generateCode();
+        setDefaultValues();
+
+        document.getElementById('qrMode').addEventListener('change', toggleModeFields);
+        document.getElementById('generateBtn').addEventListener('click', updateQrData);
+        document.getElementById('copyBtn').addEventListener('click', async function () {
+            const text = updateQrData();
+            try {
+                await navigator.clipboard.writeText(text);
+                this.textContent = 'Copied';
+                setTimeout(() => this.textContent = 'Copy data', 1200);
+            } catch (error) {
+                this.textContent = 'Failed';
+                setTimeout(() => this.textContent = 'Copy data', 1200);
+            }
+        });
+
+        ['baseUrl', 'refSegment', 'refCode', 'targetUrl', 'wifiSsid', 'wifiPassword', 'wifiSecurity', 'wifiHidden', 'customText', 'logoPreset', 'logoUrl'].forEach(function (id) {
+            document.getElementById(id).addEventListener('input', updateQrData);
+            document.getElementById(id).addEventListener('change', updateQrData);
+        });
+
+        document.getElementById('logoFile').addEventListener('change', function (event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedLogoData = e.target.result;
+                updateQrData();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        toggleModeFields();
+    </script>
+</body>
+</html>

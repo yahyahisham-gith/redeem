@@ -1,4 +1,13 @@
 localhost:8081 {
     root * D:\t
+
+    handle /ref/* {
+        rewrite * /ref-redirect.html
+    }
+
+    handle /r/* {
+        rewrite * /ref-redirect.html
+    }
+
     file_server
 }

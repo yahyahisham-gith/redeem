@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>Redirecting...</p>
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var path = window.location.pathname.split('/').filter(Boolean);
+            var code = params.get('r') || params.get('ref') || params.get('code') || params.get('id');
+            if (!code && (path[0] === 'ref' || path[0] === 'r')) code = path[1] || '';
+
+            var target = params.get('target') || params.get('redirect') || params.get('to') || params.get('url') || params.get('next') || params.get('destination');
+            var fallback = target || (path[0] === 'ref' || path[0] === 'r' ? '/' : window.location.pathname);
+
+            try {
+                var destination = /^https?:\/\//i.test(fallback) ? fallback : new URL(fallback, window.location.origin).toString();
+                window.location.replace(destination);
+            } catch (error) {
+                window.location.replace(window.location.origin + '/');
+            }
+        }());
+    </script>
+</body>
+</html>
